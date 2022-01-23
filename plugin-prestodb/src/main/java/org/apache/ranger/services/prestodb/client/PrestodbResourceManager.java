@@ -41,18 +41,18 @@ public class PrestodbResourceManager {
     Map<String, Object> ret = null;
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug("==> PrestodbResourceMgr.connectionTest ServiceName: " + serviceName + "Configs" + configs);
+      LOG.debug("==> PrestodbResourceManager.connectionTest() ServiceName: " + serviceName + "Configs" + configs);
     }
 
     try {
       ret = PrestodbClient.connectionTest(serviceName, configs);
     } catch (Exception e) {
-      LOG.error("<== PrestodbResourceManager.connectionTest Error: " + e);
+      LOG.error("<== PrestodbResourceManager.connectionTest() Error: " + e);
       throw e;
     }
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug("<== PrestodbResourceManager.connectionTest Result : " + ret);
+      LOG.debug("<== PrestodbResourceManager.connectionTest() Result : " + ret);
     }
 
     return ret;
@@ -75,7 +75,7 @@ public class PrestodbResourceManager {
 
 
     if (LOG.isDebugEnabled()) {
-      LOG.debug("<== PrestodbResourceMgr.getPrestodbResources()  UserInput: \"" + userInput + "\" resource : " + resource + " resourceMap: " + resourceMap);
+      LOG.debug("<== PrestodbResourceMgr.getPrestodbResources() UserInput: \"" + userInput + "\" resource : " + resource + " resourceMap: " + resourceMap);
     }
 
     if (userInput != null && resource != null) {
@@ -106,7 +106,7 @@ public class PrestodbResourceManager {
       try {
 
         if (LOG.isDebugEnabled()) {
-          LOG.debug("==> PrestodbResourceMgr.getPrestodbResources() UserInput: " + userInput + " configs: " + configs + " catalogList: " + catalogList + " tableList: "
+          LOG.debug("==> PrestodbResourceManager.getPrestodbResources() UserInput: \"" + userInput + "\" configs: " + configs + " catalogList: " + catalogList + " tableList: "
             + tableList + " columnList: " + columnList);
         }
 
