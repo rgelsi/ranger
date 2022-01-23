@@ -15,14 +15,14 @@ package org.apache.ranger.authorization.prestodb.authorizer;
 
 import com.google.inject.Injector;
 import com.google.inject.Scopes;
-import io.airlift.bootstrap.Bootstrap;
+import com.facebook.airlift.bootstrap.Bootstrap;
 import com.facebook.presto.spi.security.SystemAccessControl;
 import com.facebook.presto.spi.security.SystemAccessControlFactory;
 
 import java.util.Map;
 
 import static com.google.common.base.Throwables.throwIfUnchecked;
-import static io.airlift.configuration.ConfigBinder.configBinder;
+import static com.facebook.airlift.configuration.ConfigBinder.configBinder;
 import static java.util.Objects.requireNonNull;
 
 public class RangerSystemAccessControlFactory
@@ -47,7 +47,6 @@ public class RangerSystemAccessControlFactory
       );
 
       Injector injector = app
-        .strictConfig()
         .doNotInitializeLogging()
         .setRequiredConfigurationProperties(config)
         .initialize();

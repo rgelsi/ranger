@@ -18,12 +18,13 @@
  */
 package org.apache.ranger.authorization.prestodb.authorizer;
 
-import io.airlift.configuration.Config;
-import io.airlift.configuration.ConfigDescription;
+import com.facebook.airlift.configuration.Config;
+import com.facebook.airlift.configuration.ConfigDescription;
 
 public class RangerConfig {
   private String keytab;
   private String principal;
+  private boolean useUgi = false;
   private String hadoopConfigPath;
 
   public String getKeytab() { return keytab; }
@@ -43,6 +44,16 @@ public class RangerConfig {
   @SuppressWarnings("unused")
   public RangerConfig setPrincipal(String principal) {
     this.principal = principal;
+    return this;
+  }
+
+  public boolean isUseUgi() { return useUgi; }
+
+  @Config("ranger.use_ugi")
+  @ConfigDescription("Use Hadoop User Group Information instead of Presto groups")
+  @SuppressWarnings("unused")
+  public RangerConfig setUseUgi(boolean useUgi) {
+    this.useUgi = useUgi;
     return this;
   }
 
