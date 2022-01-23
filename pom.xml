@@ -173,7 +173,7 @@
         <orc.core.version>1.6.7</orc.core.version>
         <owasp-java-html-sanitizer.version>r239</owasp-java-html-sanitizer.version>
         <paranamer.version>2.3</paranamer.version>
-        <presto.version>333</presto.version>
+        <presto.version>350</presto.version>
         <prestodb.version>0.268</prestodb.version>
         <poi.version>4.1.2</poi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -203,13 +203,13 @@
         <kstruct.gethostname4j.version>0.0.2</kstruct.gethostname4j.version>
         <jna.version>5.2.0</jna.version>
         <jna-platform.version>5.2.0</jna-platform.version>
-        <!-- presto plugin deps -->
-        <presto.airlift.version>0.192</presto.airlift.version>
+        <!-- Presto plugin deps -->
+        <presto.airlift.version>202</presto.airlift.version>
         <presto.bval-jsr.version>2.0.0</presto.bval-jsr.version>
-        <presto.guice.version>4.2.2</presto.guice.version>
-        <presto.guava.version>26.0-jre</presto.guava.version>
+        <presto.guice.version>4.2.3</presto.guice.version>
+        <presto.guava.version>29.0-jre</presto.guava.version>
         <presto.validation-api.version>2.0.1.Final</presto.validation-api.version>
-        <presto.re2j.version>1.1</presto.re2j.version>
+        <presto.re2j.version>1.4</presto.re2j.version>
         <!-- PrestoDB plugin deps -->
         <prestodb.airlift.version>0.201</prestodb.airlift.version>
         <prestodb.bval-jsr.version>2.0.0</prestodb.bval-jsr.version>
