@@ -5,55 +5,6 @@
   "policies": [
     {
       "service": "cl1_prestodb",
-      "name": "checkCanImpersonateUser",
-      "policyType": 0,
-      "policyPriority": 0,
-      "description": "",
-      "isAuditEnabled": true,
-      "resources": {
-        "prestodbuser": {
-          "values": [
-            "bob"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        }
-      },
-      "policyItems": [
-        {
-          "accesses": [
-            {
-              "type": "impersonate",
-              "isAllowed": true
-            }
-          ],
-          "users": [
-            "admin"
-          ],
-          "groups": [],
-          "roles": [],
-          "conditions": [],
-          "delegateAdmin": false
-        }
-      ],
-      "denyPolicyItems": [],
-      "allowExceptions": [],
-      "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
-      "serviceType": "prestodb",
-      "options": {},
-      "validitySchedules": [],
-      "policyLabels": [],
-      "zoneName": "",
-      "isDenyAllElse": false,
-      "id": 51,
-      "guid": "7ab96b62-6fd3-4193-bf49-af462c25784d",
-      "isEnabled": true,
-      "version": 1
-    },
-    {
-      "service": "cl1_prestodb",
       "name": "alice-schema",
       "policyType": 0,
       "policyPriority": 0,
@@ -119,8 +70,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -192,8 +141,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -280,8 +227,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -347,8 +292,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -407,8 +350,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -457,8 +398,6 @@
       "denyPolicyItems": [],
       "allowExceptions": [],
       "denyExceptions": [],
-      "dataMaskPolicyItems": [],
-      "rowFilterPolicyItems": [],
       "serviceType": "prestodb",
       "options": {},
       "validitySchedules": [],
@@ -467,153 +406,6 @@
       "isDenyAllElse": false,
       "id": 67,
       "guid": "370d3e54-0428-4fcb-b0b5-ad1f5dfdd7db",
-      "isEnabled": true,
-      "version": 1
-    },
-    {
-      "service": "cl1_prestodb",
-      "name": "test-mask",
-      "policyType": 1,
-      "policyPriority": 0,
-      "description": "",
-      "isAuditEnabled": true,
-      "resources": {
-        "schema": {
-          "values": [
-            "schema"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "catalog": {
-          "values": [
-            "alice-catalog"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "column": {
-          "values": [
-            "only_first_4"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "table": {
-          "values": [
-            "table"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        }
-      },
-      "policyItems": [],
-      "denyPolicyItems": [],
-      "allowExceptions": [],
-      "denyExceptions": [],
-      "dataMaskPolicyItems": [
-        {
-          "dataMaskInfo": {
-            "dataMaskType": "MASK_SHOW_FIRST_4"
-          },
-          "accesses": [
-            {
-              "type": "select",
-              "isAllowed": true
-            }
-          ],
-          "users": [
-            "{USER}"
-          ],
-          "groups": [],
-          "roles": [],
-          "conditions": [],
-          "delegateAdmin": false
-        }
-      ],
-      "rowFilterPolicyItems": [],
-      "serviceType": "prestodb",
-      "options": {},
-      "validitySchedules": [],
-      "policyLabels": [],
-      "zoneName": "",
-      "isDenyAllElse": false,
-      "id": 68,
-      "guid": "6ec12d33-4d5d-46f0-9a05-b31d78281b02",
-      "isEnabled": true,
-      "version": 1
-    },
-    {
-      "service": "cl1_prestodb",
-      "name": "test-mask-cast",
-      "policyType": 1,
-      "policyPriority": 0,
-      "description": "",
-      "isAuditEnabled": true,
-      "resources": {
-        "schema": {
-          "values": [
-            "schema"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "catalog": {
-          "values": [
-            "alice-catalog"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "column": {
-          "values": [
-            "cast_me"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        },
-        "table": {
-          "values": [
-            "table"
-          ],
-          "isExcludes": false,
-          "isRecursive": false
-        }
-      },
-      "policyItems": [],
-      "denyPolicyItems": [],
-      "allowExceptions": [],
-      "denyExceptions": [],
-      "dataMaskPolicyItems": [
-        {
-          "dataMaskInfo": {
-            "dataMaskType": "CUSTOM",
-            "valueExpr": "cast {col} as {type}"
-          },
-          "accesses": [
-            {
-              "type": "select",
-              "isAllowed": true
-            }
-          ],
-          "users": [
-            "{USER}"
-          ],
-          "groups": [],
-          "roles": [],
-          "conditions": [],
-          "delegateAdmin": false
-        }
-      ],
-      "rowFilterPolicyItems": [],
-      "serviceType": "prestodb",
-      "options": {},
-      "validitySchedules": [],
-      "policyLabels": [],
-      "zoneName": "",
-      "isDenyAllElse": false,
-      "id": 69,
-      "guid": "50e855fb-8dc2-42cd-99d3-16e8df8de774",
       "isEnabled": true,
       "version": 1
     }
@@ -738,8 +530,7 @@
         "validationMessage": "",
         "uiHint": "",
         "label": "PrestoDB User",
-        "description": "PrestoDB User",
-        "accessTypeRestrictions": ["impersonate"]
+        "description": "PrestoDB User"
       },
       {
         "itemId": 6,
@@ -839,16 +630,6 @@
       },
       {
         "itemId": 11,
-        "name": "impersonate",
-        "label": "Impersonate"
-      },
-      {
-        "itemId": 12,
-        "name": "execute",
-        "label": "execute"
-      },
-      {
-        "itemId": 13,
         "name": "all",
         "label": "All",
         "impliedGrants": [
@@ -861,9 +642,7 @@
           "alter",
           "grant",
           "revoke",
-          "show",
-          "impersonate",
-          "execute"
+          "show"
         ]
       }
     ],
@@ -915,140 +694,6 @@
     ],
     "policyConditions":
     [
-    ],
-    "dataMaskDef": {
-      "accessTypes": [
-        {
-          "name": "select"
-        }
-      ],
-      "resources": [
-        {
-          "name": "catalog",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "uiHint":"{ \"singleValue\":true }"
-        },
-        {
-          "name": "schema",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "uiHint":"{ \"singleValue\":true }"
-        },
-        {
-          "name": "table",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "uiHint":"{ \"singleValue\":true }"
-        },
-        {
-          "name": "column",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "uiHint":"{ \"singleValue\":true }"
-        }
-      ],
-      "maskTypes": [
-        {
-          "itemId": 1,
-          "name": "MASK",
-          "label": "Redact",
-          "description": "Replace lowercase with 'x', uppercase with 'X', digits with '0'",
-          "transformer": "cast(regexp_replace(regexp_replace(regexp_replace({col},'([A-Z])', 'X'),'([a-z])','x'),'([0-9])','0') as {type})",
-          "dataMaskOptions": {
-          }
-        },
-        {
-          "itemId": 2,
-          "name": "MASK_SHOW_LAST_4",
-          "label": "Partial mask: show last 4",
-          "description": "Show last 4 characters; replace rest with 'X'",
-          "transformer": "cast(regexp_replace({col}, '(.*)(.{4}$)', x -> regexp_replace(x[1], '.', 'X') || x[2]) as {type})"
-        },
-        {
-          "itemId": 3,
-          "name": "MASK_SHOW_FIRST_4",
-          "label": "Partial mask: show first 4",
-          "description": "Show first 4 characters; replace rest with 'x'",
-          "transformer": "cast(regexp_replace({col}, '(^.{4})(.*)', x -> x[1] || regexp_replace(x[2], '.', 'X')) as {type})"
-        },
-        {
-          "itemId": 4,
-          "name": "MASK_HASH",
-          "label": "Hash",
-          "description": "Hash the value of a varchar with sha256",
-          "transformer": "cast(to_hex(sha256(to_utf8({col}))) as {type})"
-        },
-        {
-          "itemId": 5,
-          "name": "MASK_NULL",
-          "label": "Nullify",
-          "description": "Replace with NULL"
-        },
-        {
-          "itemId": 6,
-          "name": "MASK_NONE",
-          "label": "Unmasked (retain original value)",
-          "description": "No masking"
-        },
-        {
-          "itemId": 12,
-          "name": "MASK_DATE_SHOW_YEAR",
-          "label": "Date: show only year",
-          "description": "Date: show only year",
-          "transformer": "date_trunc('year', {col})"
-        },
-        {
-          "itemId": 13,
-          "name": "CUSTOM",
-          "label": "Custom",
-          "description": "Custom"
-        }
-      ]
-    },
-    "rowFilterDef": {
-      "accessTypes": [
-        {
-          "name": "select"
-        }
-      ],
-      "resources": [
-        {
-          "name": "catalog",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "mandatory": true,
-          "uiHint": "{ \"singleValue\":true }"
-        },
-        {
-          "name": "schema",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "mandatory": true,
-          "uiHint": "{ \"singleValue\":true }"
-        },
-        {
-          "name": "table",
-          "matcherOptions": {
-            "wildCard": "true"
-          },
-          "lookupSupported": true,
-          "mandatory": true,
-          "uiHint": "{ \"singleValue\":true }"
-        }
-      ]
-    }
+    ]
   }
 }
