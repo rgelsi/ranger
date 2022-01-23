@@ -55,6 +55,7 @@ public class ElasticSearchAccessAuditsServiceTest {
         properties.put("ranger.audit.elasticsearch.user", "elastic");
         properties.put("ranger.audit.elasticsearch.password", "password1");
         properties.put("ranger.audit.elasticsearch.port", "9200");
+        properties.put("ranger.audit.elasticsearch.protocol", "http");
         elasticSearchAccessAuditsService.elasticSearchMgr = new ElasticSearchMgr();
         elasticSearchAccessAuditsService.elasticSearchUtil = new ElasticSearchUtil();
         elasticSearchAccessAuditsService.elasticSearchUtil.stringUtil = new StringUtil();

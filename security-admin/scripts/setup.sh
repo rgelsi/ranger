@@ -77,6 +77,7 @@ javax_net_ssl_trustStorePassword=$(get_prop 'javax_net_ssl_trustStorePassword' $
 audit_store=$(get_prop 'audit_store' $PROPFILE)
 audit_elasticsearch_urls=$(get_prop 'audit_elasticsearch_urls' $PROPFILE)
 audit_elasticsearch_port=$(get_prop 'audit_elasticsearch_port' $PROPFILE)
+audit_elasticsearch_protocol=$(get_prop 'audit_elasticsearch_protocol' $PROPFILE)
 audit_elasticsearch_user=$(get_prop 'audit_elasticsearch_user' $PROPFILE)
 audit_elasticsearch_password=$(get_prop 'audit_elasticsearch_password' $PROPFILE)
 audit_elasticsearch_index=$(get_prop 'audit_elasticsearch_index' $PROPFILE)
@@ -265,6 +266,10 @@ init_variables(){
 		fi
 		if [ "${audit_elasticsearch_port}" == "" ] ;then
 			log "[I] Please provide valid port for 'elasticsearch' audit store!"
+			exit 1
+		fi
+		if [ "${audit_elasticsearch_protocol}" == "" ] ;then
+			log "[I] Please provide valid protocol for 'elasticsearch' audit store!"
 			exit 1
 		fi
 	fi
@@ -780,6 +785,10 @@ update_properties() {
 
 		propertyName=ranger.audit.elasticsearch.port
 		newPropertyValue=${audit_elasticsearch_port}
+		updatePropertyToFilePy $propertyName $newPropertyValue $to_file_ranger
+
+		propertyName=ranger.audit.elasticsearch.protocol
+		newPropertyValue=${audit_elasticsearch_protocol}
 		updatePropertyToFilePy $propertyName $newPropertyValue $to_file_ranger
 
 		propertyName=ranger.audit.elasticsearch.user

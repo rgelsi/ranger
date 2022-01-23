@@ -114,6 +114,7 @@ config2xmlMAP = {
 	'xa.audit.store':'ranger.audit.source.type',
 	'audit_elasticsearch_urls':'ranger.audit.elasticsearch.urls',
 	'audit_elasticsearch_port':'ranger.audit.elasticsearch.port',
+	'audit_elasticsearch_protocol':'ranger.audit.elasticsearch.protocol',
 	'audit_elasticsearch_user':'ranger.audit.elasticsearch.user',
 	'audit_elasticsearch_password':'ranger.audit.elasticsearch.password',
 	'audit_solr_urls':'ranger.audit.solr.urls',

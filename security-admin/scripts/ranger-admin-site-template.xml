@@ -169,6 +169,10 @@
 		<value></value>
 	</property>
 	<property>
+		<name>ranger.audit.elasticsearch.protocol</name>
+		<value></value>
+	</property>
+	<property>
 		<name>ranger.audit.elasticsearch.user</name>
 		<value></value>
 	</property>
