@@ -60,6 +60,7 @@ Build Process
    ranger-<version>-elasticsearch-plugin.tar.gz
    ranger-<version>-ozone-plugin.tar.gz
    ranger-<version>-presto-plugin.tar.gz
+   ranger-<version>-prestodb-plugin.tar.gz
    ranger-<version>-schema-registry-plugin.tar.gz
 
 Importing Apache Ranger Project into Eclipse
@@ -90,7 +91,8 @@ Installation Host Information
     (j)  Elasticsearch plugin needs to be installed on Elasticsearch hosts
     (k)  Ozone plugin needs to be installed on Ozone hosts
     (l)  Presto plugin needs to be installed on Presto hosts
-    (m)  Schema Registry plugin needs to be installed on Schema Registry hosts
+    (m)  PrestoDB plugin needs to be installed on PrestoDB hosts
+    (n)  Schema Registry plugin needs to be installed on Schema Registry hosts
 
 Installation Process
 ~~~~~~~~~~~~~~~~~~~~
