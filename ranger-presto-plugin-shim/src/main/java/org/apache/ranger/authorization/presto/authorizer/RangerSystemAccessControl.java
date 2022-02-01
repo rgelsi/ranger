@@ -391,8 +391,8 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  public Set<String> filterColumns(SystemSecurityContext context, CatalogSchemaTableName table, Set<String> columns) {
-    Set<String> filteredColumns;
+  public List<ColumnMetadata> filterColumns(SystemSecurityContext context, CatalogSchemaTableName table, List<ColumnMetadata> columns) {
+    List<ColumnMetadata> filteredColumns;
     try {
       activatePluginClassLoader();
       filteredColumns = systemAccessControlImpl.filterColumns(context, table, columns);
