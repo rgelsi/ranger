@@ -67,9 +67,9 @@
     </mailingLists>
     <properties>
         <maven.version.required>3.6.3</maven.version.required>
-        <java.version.required>1.8</java.version.required>
-        <javac.source.version>1.8</javac.source.version>
-        <javac.target.version>1.8</javac.target.version>
+        <java.version.required>11</java.version.required>
+        <javac.source.version>11</javac.source.version>
+        <javac.target.version>11</javac.target.version>
         <distMgmtStagingId>apache.staging.https</distMgmtStagingId>
         <distMgmtStagingName>Apache Release Distribution Repository</distMgmtStagingName>
         <distMgmtStagingUrl>https://repository.apache.org/service/local/staging/deploy/maven2</distMgmtStagingUrl>
@@ -203,6 +203,8 @@
         <kstruct.gethostname4j.version>0.0.2</kstruct.gethostname4j.version>
         <jna.version>5.2.0</jna.version>
         <jna-platform.version>5.2.0</jna-platform.version>
+        <!-- JDK 12 deps -->
+        <jakarta.xml.bind-api.version>3.0.1</jakarta.xml.bind-api.version>
         <!-- Presto plugin deps -->
         <presto.airlift.version>202</presto.airlift.version>
         <presto.bval-jsr.version>2.0.0</presto.bval-jsr.version>
@@ -864,7 +866,7 @@
                         <target>${javac.target.version}</target>
                         <encoding>UTF-8</encoding>
                         <maxmem>1024m</maxmem>
-                        <fork>true</fork>
+                        <fork>false</fork>
                     </configuration>
                 </plugin>
                 <plugin>
