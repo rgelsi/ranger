@@ -1036,6 +1036,7 @@
                         <exclude>.gitignore/**</exclude>
                         <exclude>.svn/**</exclude>
                         <exclude>.idea/**</exclude>
+                        <exclude>.vscode/**</exclude>
                         <exclude>dev-support/**</exclude>
                         <exclude>**/.gitignore/**</exclude>
                         <exclude>**/.project/**</exclude>
