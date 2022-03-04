@@ -783,7 +783,8 @@ then
 	fi
 fi
 
-if [ "${HCOMPONENT_NAME}" = "presto" ]
+if [ "${HCOMPONENT_NAME}" = "presto" ] ||
+   [ "${HCOMPONENT_NAME}" = "prestodb" ]
 then
 	if [ "${action}" = "enable" ]
 	then

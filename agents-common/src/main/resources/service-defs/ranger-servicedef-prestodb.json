@@ -1,5 +1,5 @@
 {
-  "id": 17,
+  "id": 117,
   "name": "prestodb",
   "displayName": "prestodb",
   "implClass": "org.apache.ranger.services.prestodb.RangerServicePrestodb",

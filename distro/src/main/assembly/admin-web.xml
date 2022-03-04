@@ -494,6 +494,7 @@
         <includes>
           <include>org.apache.ranger:ranger-prestodb-plugin</include>
           <include>com.facebook.presto:presto-spi:jar:${prestodb.version}</include>
+          <include>com.facebook.presto:presto-common:jar:${prestodb.version}</include>
           <include>com.facebook.presto:presto-jdbc:jar:${prestodb.version}</include>
         </includes>
       </binaries>
