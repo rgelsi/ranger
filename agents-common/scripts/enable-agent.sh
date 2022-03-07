@@ -213,7 +213,8 @@ elif [ "${HCOMPONENT_NAME}" = "kylin" ]; then
 elif [ "${HCOMPONENT_NAME}" = "elasticsearch" ]; then
     HCOMPONENT_LIB_DIR=${HCOMPONENT_INSTALL_DIR}/plugins
 elif [ "${HCOMPONENT_NAME}" = "presto" ] ||
-     [ "${HCOMPONENT_NAME}" = "prestodb" ]; then
+     [ "${HCOMPONENT_NAME}" = "prestodb" ] ||
+     [ "${HCOMPONENT_NAME}" = "trino" ]; then
     HCOMPONENT_LIB_DIR=${HCOMPONENT_INSTALL_DIR}/plugin/ranger
     if [ ! -d "${HCOMPONENT_LIB_DIR}" ]; then
         echo "INFO: Creating ${HCOMPONENT_LIB_DIR}"
@@ -248,7 +249,8 @@ elif [ "${HCOMPONENT_NAME}" = "elasticsearch" ]; then
 	chown $CFG_OWNER_INF $HCOMPONENT_CONF_DIR
     fi
 elif [ "${HCOMPONENT_NAME}" = "presto" ] ||
-	 [ "${HCOMPONENT_NAME}" = "prestodb" ]; then
+	 [ "${HCOMPONENT_NAME}" = "prestodb" ] ||
+	 [ "${HCOMPONENT_NAME}" = "trino" ]; then
     HCOMPONENT_CONF_DIR=${HCOMPONENT_INSTALL_DIR}/etc
 fi
 
@@ -784,7 +786,8 @@ then
 fi
 
 if [ "${HCOMPONENT_NAME}" = "presto" ] ||
-   [ "${HCOMPONENT_NAME}" = "prestodb" ]
+   [ "${HCOMPONENT_NAME}" = "prestodb" ] ||
+   [ "${HCOMPONENT_NAME}" = "trino" ]
 then
 	if [ "${action}" = "enable" ]
 	then
@@ -813,6 +816,9 @@ then
 	elif [ "${HCOMPONENT_NAME}" = "prestodb" ]
 	then
 		cd ${HCOMPONENT_LIB_DIR}/ranger-prestodb-plugin-impl/
+	elif [ "${HCOMPONENT_NAME}" = "trino" ]
+	then
+		cd ${HCOMPONENT_LIB_DIR}/ranger-trino-plugin-impl/
 	fi
 	ln -sf ${HCOMPONENT_CONF_DIR} conf
 fi
