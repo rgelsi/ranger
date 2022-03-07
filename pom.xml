@@ -208,8 +208,8 @@
         <!-- Presto plugin deps -->
         <presto.airlift.version>202</presto.airlift.version>
         <presto.bval-jsr.version>2.0.0</presto.bval-jsr.version>
-        <presto.guice.version>4.2.3</presto.guice.version>
-        <presto.guava.version>29.0-jre</presto.guava.version>
+        <presto.guice.version>4.2.2</presto.guice.version>
+        <presto.guava.version>26.0-jre</presto.guava.version>
         <presto.validation-api.version>2.0.1.Final</presto.validation-api.version>
         <presto.re2j.version>1.4</presto.re2j.version>
         <!-- PrestoDB plugin deps -->
