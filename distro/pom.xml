@@ -73,7 +73,6 @@
                                         <descriptor>src/main/assembly/plugin-sqoop.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-kylin.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-elasticsearch.xml</descriptor>
-                                        <descriptor>src/main/assembly/plugin-schema-registry.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-presto.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-prestodb.xml</descriptor>
                                         <descriptor>src/main/assembly/sample-client.xml</descriptor>
@@ -585,35 +584,6 @@
             </build>
         </profile>
         <profile>
-            <id>ranger-schema-registry-plugin</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-assembly-plugin</artifactId>
-                        <version>${assembly.plugin.version}</version>
-                        <configuration>
-                            <finalName>ranger-${project.version}</finalName>
-                            <outputDirectory>../target</outputDirectory>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>single</goal>
-                                </goals>
-                                <phase>package</phase>
-                                <configuration>
-                                    <skipAssembly>false</skipAssembly>
-                                    <descriptors>
-                                        <descriptor>src/main/assembly/plugin-schema-registry.xml</descriptor>
-                                    </descriptors>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
             <id>linux</id>
             <activation>
                 <os>
@@ -659,7 +629,6 @@
                                         <descriptor>src/main/assembly/plugin-sqoop.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-kylin.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-elasticsearch.xml</descriptor>
-                                        <descriptor>src/main/assembly/plugin-schema-registry.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-presto.xml</descriptor>
                                         <descriptor>src/main/assembly/plugin-prestodb.xml</descriptor>
                                     </descriptors>
