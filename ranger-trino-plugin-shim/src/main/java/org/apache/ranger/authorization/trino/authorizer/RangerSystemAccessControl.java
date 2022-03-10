@@ -505,16 +505,6 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  public void checkCanShowRoles(SystemSecurityContext context, String catalogName) {
-    try {
-      activatePluginClassLoader();
-      systemAccessControlImpl.checkCanShowRoles(context, catalogName);
-    } finally {
-      deactivatePluginClassLoader();
-    }
-  }
-
-  @Override
   public Optional<ViewExpression> getRowFilter(SystemSecurityContext context, CatalogSchemaTableName tableName) {
     Optional<ViewExpression> viewExpression;
     try {
@@ -609,7 +599,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanReadSystemInformation(SystemSecurityContext context) {
+  public void checkCanReadSystemInformation(SystemSecurityContext context) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanReadSystemInformation(context);
@@ -619,7 +609,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanWriteSystemInformation(SystemSecurityContext context) {
+  public void checkCanWriteSystemInformation(SystemSecurityContext context) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanWriteSystemInformation(context);
@@ -709,7 +699,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanGrantSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee, boolean grantOption) {
+  public void checkCanGrantSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee, boolean grantOption) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanGrantSchemaPrivilege(context, privilege, schema, grantee, grantOption);
@@ -719,7 +709,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanDenySchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee) {
+  public void checkCanDenySchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanDenySchemaPrivilege(context, privilege, schema, grantee);
@@ -729,7 +719,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanRevokeSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal revokee, boolean grantOption) {
+  public void checkCanRevokeSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal revokee, boolean grantOption) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanRevokeSchemaPrivilege(context, privilege, schema, revokee, grantOption);
@@ -739,7 +729,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetTableProperties(SystemSecurityContext context, CatalogSchemaTableName table, Map<String, Optional<Object>> properties) {
+  public void checkCanSetTableProperties(SystemSecurityContext context, CatalogSchemaTableName table, Map<String, Optional<Object>> properties) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanSetTableProperties(context, table, properties);
@@ -749,7 +739,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetTableAuthorization(SystemSecurityContext context, CatalogSchemaTableName table, TrinoPrincipal principal) {
+  public void checkCanSetTableAuthorization(SystemSecurityContext context, CatalogSchemaTableName table, TrinoPrincipal principal) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanSetTableAuthorization(context, table, principal);
@@ -759,7 +749,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetViewAuthorization(SystemSecurityContext context, CatalogSchemaTableName view, TrinoPrincipal principal) {
+  public void checkCanSetViewAuthorization(SystemSecurityContext context, CatalogSchemaTableName view, TrinoPrincipal principal) {
     try {
       activatePluginClassLoader();
       systemAccessControlImpl.checkCanSetViewAuthorization(context, view, principal);

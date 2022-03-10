@@ -283,7 +283,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanReadSystemInformation(SystemSecurityContext context) {
+  public void checkCanReadSystemInformation(SystemSecurityContext context) {
     if (!hasPermission(createUserResource(context.getIdentity().getUser()), context, TrinoAccessType.ADMIN)) {
       LOG.debug("RangerSystemAccessControl.checkCanReadSystemInformation() denied");
       AccessDeniedException.denyReadSystemInformationAccess();
@@ -291,7 +291,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanWriteSystemInformation(SystemSecurityContext context) {
+  public void checkCanWriteSystemInformation(SystemSecurityContext context) {
     if (!hasPermission(createUserResource(context.getIdentity().getUser()), context, TrinoAccessType.ADMIN)) {
       LOG.debug("RangerSystemAccessControl.denyWriteSystemInformationAccess() denied");
       AccessDeniedException.denyWriteSystemInformationAccess();
@@ -408,7 +408,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanGrantSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee, boolean grantOption) {
+  public void checkCanGrantSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee, boolean grantOption) {
     if (!hasPermission(createResource(schema.getCatalogName(), schema.getSchemaName()), context, TrinoAccessType.GRANT)) {
       LOG.debug("RangerSystemAccessControl.checkCanGrantSchemaPrivilege(" + schema.getSchemaName() + ") denied");
       AccessDeniedException.denyGrantSchemaPrivilege(privilege.toString(), schema.toString());
@@ -416,7 +416,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanDenySchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee) {
+  public void checkCanDenySchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal grantee) {
     if (!hasPermission(createResource(schema.getCatalogName(), schema.getSchemaName()), context, TrinoAccessType.REVOKE)) {
       LOG.debug("RangerSystemAccessControl.checkCanDenySchemaPrivilege(" + schema.getSchemaName() + ") denied");
       AccessDeniedException.denyDenySchemaPrivilege(privilege.toString(), schema.toString());
@@ -424,7 +424,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanRevokeSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal revokee, boolean grantOption) {
+  public void checkCanRevokeSchemaPrivilege(SystemSecurityContext context, Privilege privilege, CatalogSchemaName schema, TrinoPrincipal revokee, boolean grantOption) {
     if (!hasPermission(createResource(schema.getCatalogName(), schema.getSchemaName()), context, TrinoAccessType.REVOKE)) {
       LOG.debug("RangerSystemAccessControl.checkCanRevokeSchemaPrivilege(" + schema.getSchemaName() + ") denied");
       AccessDeniedException.denyRevokeSchemaPrivilege(privilege.toString(), schema.toString());
@@ -474,8 +474,6 @@ public class RangerSystemAccessControl
     }
   }
 
-  /** TABLE **/
-
   @Override
   public void checkCanShowTables(SystemSecurityContext context, CatalogSchemaName schema) {
     if (!hasPermission(createResource(schema), context, TrinoAccessType.SHOW)) {
@@ -484,6 +482,7 @@ public class RangerSystemAccessControl
     }
   }
 
+  /** TABLE **/
 
   @Override
   public void checkCanShowCreateTable(SystemSecurityContext context, CatalogSchemaTableName table) {
@@ -583,7 +582,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetColumnComment(SystemSecurityContext context, CatalogSchemaTableName table) {
+  public void checkCanSetColumnComment(SystemSecurityContext context, CatalogSchemaTableName table) {
     if (!hasPermission(createResource(table), context, TrinoAccessType.ALTER)) {
       LOG.debug("RangerSystemAccessControl.checkCanSetColumnComment(" + table.toString() + ") denied");
       AccessDeniedException.denyCommentColumn(table.toString());
@@ -591,7 +590,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetTableProperties(SystemSecurityContext context, CatalogSchemaTableName table, Map<String, Optional<Object>> properties) {
+  public void checkCanSetTableProperties(SystemSecurityContext context, CatalogSchemaTableName table, Map<String, Optional<Object>> properties) {
     if (!hasPermission(createResource(table), context, TrinoAccessType.ALTER)) {
       LOG.debug("RangerSystemAccessControl.checkCanSetTableProperties(" + table.toString() + ") denied");
       AccessDeniedException.denySetTableProperties(table.toString());
@@ -599,7 +598,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanSetTableAuthorization(SystemSecurityContext context, CatalogSchemaTableName table, TrinoPrincipal principal) {
+  public void checkCanSetTableAuthorization(SystemSecurityContext context, CatalogSchemaTableName table, TrinoPrincipal principal) {
     if (!hasPermission(createResource(table), context, TrinoAccessType.GRANT)) {
       LOG.debug("RangerSystemAccessControl.checkCanSetTableAuthorization(" + table.toString() + ") denied");
       AccessDeniedException.denySetTableAuthorization(table.toString(), principal);
@@ -702,8 +701,8 @@ public class RangerSystemAccessControl
 
   @Override
   public void checkCanRenameMaterializedView(SystemSecurityContext context, CatalogSchemaTableName view, CatalogSchemaTableName newView) {
-    if (!hasPermission(createResource(materializedView), context, TrinoAccessType.ALTER)) {
-      LOG.debug("RangerSystemAccessControl.checkCanRenameMaterializedView(" + materializedView.toString() + ") denied");
+    if (!hasPermission(createResource(view), context, TrinoAccessType.ALTER)) {
+      LOG.debug("RangerSystemAccessControl.checkCanRenameMaterializedView(" + view.toString() + ") denied");
       AccessDeniedException.denyRenameMaterializedView(view.toString(), newView.toString());
     }
   }
@@ -764,7 +763,7 @@ public class RangerSystemAccessControl
   }
 
   @Override
-  default void checkCanUpdateTableColumns(SystemSecurityContext context, CatalogSchemaTableName table, Set<String> updatedColumnNames) {
+  public void checkCanUpdateTableColumns(SystemSecurityContext context, CatalogSchemaTableName table, Set<String> updatedColumnNames) {
     for (RangerTrinoResource res : createResource(table, updatedColumnNames)) {
       if (!hasPermission(res, context, TrinoAccessType.UPDATE)) {
         LOG.debug("RangerSystemAccessControl.checkCanUpdateTableColumns(" + table.getSchemaTableName().getTableName() + ") denied");

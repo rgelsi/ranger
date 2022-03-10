@@ -17,6 +17,7 @@
 
 package org.apache.ranger.authorization.trino.authorizer;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import io.trino.spi.connector.CatalogSchemaName;
 import io.trino.spi.connector.CatalogSchemaRoutineName;
@@ -60,6 +61,7 @@ public class RangerSystemAccessControlTest {
   private static final CatalogSchemaName aliceSchema = new CatalogSchemaName("alice-catalog", "schema");
   private static final CatalogSchemaTableName aliceTable = new CatalogSchemaTableName("alice-catalog", "schema","table");
   private static final CatalogSchemaTableName aliceView = new CatalogSchemaTableName("alice-catalog", "schema","view");
+  private static final CatalogSchemaTableName aliceMaterializedView = new CatalogSchemaTableName("alice-catalog", "schema","materialized-view");
 
   private static final CatalogSchemaRoutineName aliceProcedure = new CatalogSchemaRoutineName("alice-catalog", "schema", "procedure");
   private static final String functionName = new String("function");
@@ -113,7 +115,9 @@ public class RangerSystemAccessControlTest {
     accessControlManager.checkCanCreateSchema(context(alice), aliceSchema);
     accessControlManager.checkCanDropSchema(context(alice), aliceSchema);
     accessControlManager.checkCanRenameSchema(context(alice), aliceSchema, "new-schema");
+    accessControlManager.checkCanAccessCatalog(context(alice), aliceCatalog);
     accessControlManager.checkCanShowSchemas(context(alice), aliceCatalog);
+    accessControlManager.checkCanShowTables(context(alice), aliceSchema);
 
     try {
       accessControlManager.checkCanCreateSchema(context(bob), aliceSchema);
@@ -122,6 +126,10 @@ public class RangerSystemAccessControlTest {
 
     accessControlManager.checkCanSetSchemaAuthorization(context(alice), aliceSchema, new TrinoPrincipal(USER, "principal"));
     accessControlManager.checkCanShowCreateSchema(context(alice), aliceSchema);
+
+    accessControlManager.checkCanGrantSchemaPrivilege(context(alice), SELECT, aliceSchema, new TrinoPrincipal(USER, "grantee"), true);
+    accessControlManager.checkCanRevokeSchemaPrivilege(context(alice), SELECT, aliceSchema, new TrinoPrincipal(USER, "grantee"), true);
+    accessControlManager.checkCanDenySchemaPrivilege(context(alice), SELECT, aliceSchema, new TrinoPrincipal(USER, "revokee"));
   }
 
   @Test
@@ -132,16 +140,29 @@ public class RangerSystemAccessControlTest {
     assertEquals(accessControlManager.filterTables(context(alice), aliceCatalog, aliceTables), aliceTables);
     assertEquals(accessControlManager.filterTables(context(bob), "alice-catalog", aliceTables), ImmutableSet.of());
 
-    accessControlManager.checkCanCreateTable(context(alice), aliceTable);
+    accessControlManager.checkCanShowCreateTable(context(alice), aliceTable);
+    accessControlManager.checkCanCreateTable(context(alice), aliceTable, Map.of());
+
     accessControlManager.checkCanDropTable(context(alice), aliceTable);
     accessControlManager.checkCanSelectFromColumns(context(alice), aliceTable, ImmutableSet.of());
     accessControlManager.checkCanInsertIntoTable(context(alice), aliceTable);
     accessControlManager.checkCanDeleteFromTable(context(alice), aliceTable);
-    accessControlManager.checkCanRenameColumn(context(alice), aliceTable);
+    accessControlManager.checkCanTruncateTable(context(alice), aliceTable);
 
+    accessControlManager.checkCanRenameColumn(context(alice), aliceTable);
+    accessControlManager.checkCanRenameTable(context(alice), aliceTable, new CatalogSchemaTableName("alice-catalog", "schema","new-table"));
+
+    accessControlManager.checkCanSetTableComment(context(alice), aliceTable);
+    accessControlManager.checkCanSetColumnComment(context(alice), aliceTable);
+
+    accessControlManager.checkCanGrantTablePrivilege(context(alice), SELECT, aliceTable, new TrinoPrincipal(USER, "grantee"), true);
+    accessControlManager.checkCanRevokeTablePrivilege(context(alice), SELECT, aliceTable, new TrinoPrincipal(USER, "revokee"), true);
+    accessControlManager.checkCanDenyTablePrivilege(context(alice), SELECT, aliceTable, new TrinoPrincipal(USER, "grantee"));
+    accessControlManager.checkCanSetTableAuthorization(context(alice), aliceTable, new TrinoPrincipal(USER, "grantee"));
+    accessControlManager.checkCanSetTableProperties(context(alice), aliceTable, ImmutableMap.of());
 
     try {
-      accessControlManager.checkCanCreateTable(context(bob), aliceTable);
+      accessControlManager.checkCanCreateTable(context(bob), aliceTable, Map.of());
     } catch (AccessDeniedException expected) {
     }
   }
@@ -152,15 +173,31 @@ public class RangerSystemAccessControlTest {
   {
     accessControlManager.checkCanCreateView(context(alice), aliceView);
     accessControlManager.checkCanDropView(context(alice), aliceView);
+    accessControlManager.checkCanRenameView(context(alice), aliceView, new CatalogSchemaTableName("alice-catalog", "schema","new-view"));
     accessControlManager.checkCanSelectFromColumns(context(alice), aliceView, ImmutableSet.of());
     accessControlManager.checkCanCreateViewWithSelectFromColumns(context(alice), aliceTable, ImmutableSet.of());
     accessControlManager.checkCanCreateViewWithSelectFromColumns(context(alice), aliceView, ImmutableSet.of());
-    accessControlManager.checkCanSetCatalogSessionProperty(context(alice), aliceCatalog, "property");
-    accessControlManager.checkCanGrantTablePrivilege(context(alice), SELECT, aliceTable, new TrinoPrincipal(USER, "grantee"), true);
-    accessControlManager.checkCanRevokeTablePrivilege(context(alice), SELECT, aliceTable, new TrinoPrincipal(USER, "revokee"), true);
+    accessControlManager.checkCanSetViewAuthorization(context(alice), aliceView, new TrinoPrincipal(USER, "grantee"));
 
     try {
       accessControlManager.checkCanCreateView(context(bob), aliceView);
+    } catch (AccessDeniedException expected) {
+    }
+  }
+
+  @Test
+  @SuppressWarnings("PMD")
+  public void testMaterializedViewOperations()
+  {
+    accessControlManager.checkCanCreateMaterializedView(context(alice), aliceMaterializedView, Map.of());
+    accessControlManager.checkCanDropMaterializedView(context(alice), aliceMaterializedView);
+    accessControlManager.checkCanRenameMaterializedView(context(alice), aliceView, new CatalogSchemaTableName("alice-catalog", "schema","new-materialized-view"));
+    accessControlManager.checkCanRefreshMaterializedView(context(alice), aliceMaterializedView);
+    accessControlManager.checkCanSelectFromColumns(context(alice), aliceMaterializedView, ImmutableSet.of());
+    accessControlManager.checkCanSetMaterializedViewProperties(context(alice), aliceMaterializedView, ImmutableMap.of());
+
+    try {
+      accessControlManager.checkCanCreateMaterializedView(context(bob), aliceMaterializedView, Map.of());
     } catch (AccessDeniedException expected) {
     }
   }
